@@ -230,5 +230,19 @@
   chave("#bSom", somLigado, "som", (v) => { somLigado = v; if (v) { audio(); somBola(); } });
   $("#bTestar").addEventListener("click", () => { const v = vozLigada; vozLigada = true; falar("Bê, sete. Ene, quarenta e três. Ó, setenta e um."); vozLigada = v; });
 
+  // ---------------------------------------------------------------- tela cheia
+  const raiz = document.documentElement, btnTela = $("#bTela");
+  const pedirTela = raiz.requestFullscreen || raiz.webkitRequestFullscreen;
+  const sairTela = document.exitFullscreen || document.webkitExitFullscreen;
+  const emTela = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  if (pedirTela && sairTela) {
+    btnTela.hidden = false;
+    btnTela.addEventListener("click", () => {
+      try { if (emTela()) sairTela.call(document); else pedirTela.call(raiz); } catch {}
+    });
+    const atualizar = () => { btnTela.setAttribute("aria-pressed", String(emTela())); btnTela.textContent = emTela() ? "Sair da tela cheia" : "Tela cheia"; };
+    document.addEventListener("fullscreenchange", atualizar); document.addEventListener("webkitfullscreenchange", atualizar);
+  }
+
   novaPartida(); novaCartela();
 })();
