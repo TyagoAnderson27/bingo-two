@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bingo</title>
+<meta name="theme-color" content="#0b2e2b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topo">
+  <h1>Bingo</h1>
+  <div class="chaves">
+    <button type="button" class="chave" id="bVoz" aria-pressed="true">Voz</button>
+    <button type="button" class="chave" id="bSom" aria-pressed="true">Sons</button>
+  </div>
+</header>
+
+<main class="layout">
+  <div class="col">
+    <section class="palco" aria-label="Sorteio">
+      <div class="globo" id="globo" aria-hidden="true"></div>
+      <div class="atual">
+        <div class="bola-grande" id="bolaAtual" role="status" aria-live="polite" aria-label="Nenhuma bola sorteada ainda">
+          <span class="miolo"><small id="bolaLetra">–</small><b id="bolaNum">?</b></span>
+        </div>
+        <div class="historico">
+          <span class="rotulo">Últimas bolas</span>
+          <ol id="historico" aria-label="Últimas bolas sorteadas"></ol>
+          <span class="contagem" id="contagem">0 de 75</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="controles" aria-label="Controles do sorteio">
+      <button type="button" class="btn grande" id="bSortear">Sortear</button>
+      <div class="linha">
+        <button type="button" class="btn sec" id="bAuto" aria-pressed="false">Automático</button>
+        <label class="seg">a cada
+          <select id="selTempo" aria-label="Tempo entre as bolas">
+            <option value="4000">4 s</option>
+            <option value="6000" selected>6 s</option>
+            <option value="9000">9 s</option>
+          </select>
+        </label>
+        <button type="button" class="btn sec" id="bNova">Nova partida</button>
+      </div>
+    </section>
+
+    <section class="quadro-caixa" aria-label="Números sorteados">
+      <h2>Quadro</h2>
+      <div class="quadro" id="quadro"></div>
+    </section>
+  </div>
+
+  <div class="col">
+    <section class="cartela-caixa" aria-label="Sua cartela">
+      <div class="cartela-topo">
+        <h2>Sua cartela</h2>
+        <label class="seg"><input type="checkbox" id="chkAuto" checked> Marcar sozinho</label>
+      </div>
+      <div class="cartela" id="cartela" role="grid" aria-label="Cartela de bingo 5 por 5"></div>
+      <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+      <button type="button" class="btn sec" id="bCartela">Nova cartela</button>
+    </section>
+
+    <details class="voz-caixa">
+      <summary>Escolher a voz</summary>
+      <label class="seg">Voz
+        <select id="selVoz" aria-label="Voz que chama os números"></select>
+      </label>
+      <button type="button" class="btn sec" id="bTestar">Testar voz</button>
+      <p class="fino" id="vozInfo"></p>
+    </details>
+  </div>
+</main>
+
+<div class="faixa" id="faixa" role="alert" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
